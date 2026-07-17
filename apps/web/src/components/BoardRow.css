@@ -1,0 +1,45 @@
+.board-row {
+  display: flex;
+  gap: 12px;
+  min-height: 160px;
+  padding: 10px 16px;
+  align-items: center;
+  justify-content: center;
+}
+
+.board-row--enemy {
+  background: linear-gradient(180deg, rgba(139, 30, 30, 0.06), transparent);
+}
+
+.board-row--player {
+  background: linear-gradient(0deg, rgba(30, 90, 139, 0.08), transparent);
+}
+
+.board-row__empty-slot {
+  width: 108px;
+  min-height: 150px;
+  border: 1.5px dashed rgba(255, 255, 255, 0.12);
+  border-radius: 12px;
+}
+
+.unit-slot--hit {
+  animation: unit-hit 400ms ease;
+}
+
+.unit-slot--attacking {
+  animation: unit-lunge 400ms ease;
+}
+
+@keyframes unit-hit {
+  0% { transform: translateY(0) scale(1); filter: brightness(1); }
+  25% { transform: translateY(-4px) scale(0.94) rotate(-3deg); filter: brightness(2) saturate(0.4); }
+  55% { transform: translateY(2px) scale(1.03) rotate(2deg); }
+  100% { transform: translateY(0) scale(1); filter: brightness(1); }
+}
+
+@keyframes unit-lunge {
+  0% { transform: translateY(0) scale(1); }
+  35% { transform: translateY(-18px) scale(1.08); }
+  60% { transform: translateY(6px) scale(0.98); }
+  100% { transform: translateY(0) scale(1); }
+}

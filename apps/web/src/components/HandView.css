@@ -1,0 +1,16 @@
+.hand-view {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  gap: -20px;
+  padding: 8px 0 4px;
+  min-height: 190px;
+}
+
+.hand-view__card {
+  margin: 0 -14px;
+}
+
+.hand-view__card:hover {
+  z-index: 999 !important;
+}

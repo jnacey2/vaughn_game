@@ -1,0 +1,94 @@
+.deck-select {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 48px 24px 64px;
+  background: radial-gradient(ellipse at 50% -10%, #1a1830 0%, #05040a 60%);
+  color: #f2eee6;
+}
+
+.deck-select__hero {
+  max-width: 720px;
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.deck-select__hero h1 {
+  font-size: 42px;
+  letter-spacing: 0.12em;
+  margin: 0 0 12px;
+  background: linear-gradient(90deg, #f0a561, #a78bfa);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.deck-select__subtitle {
+  font-size: 14px;
+  line-height: 1.6;
+  color: #cfc9bd;
+}
+
+.deck-select__houses {
+  display: flex;
+  gap: 32px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.deck-select__house {
+  width: 300px;
+  border: 2px solid;
+  border-radius: 16px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+}
+
+.deck-select__house h2 {
+  margin: 0;
+  font-size: 22px;
+  letter-spacing: 0.05em;
+}
+
+.deck-select__tagline {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: #cfc9bd;
+  margin-bottom: 8px;
+}
+
+.deck-select__captain {
+  margin: 4px 0;
+}
+
+.deck-select__flavor {
+  font-size: 12px;
+  font-style: italic;
+  text-align: center;
+  color: #d8d3c8;
+  min-height: 48px;
+}
+
+.deck-select__play-btn {
+  margin-top: 12px;
+  border: none;
+  border-radius: 999px;
+  padding: 12px 28px;
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: 0.05em;
+  color: #12100c;
+  cursor: pointer;
+  transition: transform 160ms ease, filter 160ms ease;
+}
+
+.deck-select__play-btn:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.15);
+}
