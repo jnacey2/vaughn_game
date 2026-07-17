@@ -11,9 +11,14 @@ import {
   type GameState,
   type PlayerId,
 } from '@void-dynasty/engine';
-import { chooseNextAction } from '@void-dynasty/bot';
+import { chooseNextAction, type Difficulty } from '@void-dynasty/bot';
 
-export type Screen = 'deckSelect' | 'match' | 'gameOver';
+export type { Difficulty } from '@void-dynasty/bot';
+
+export type Screen = 'deckSelect' | 'rollingForFirst' | 'match' | 'gameOver';
+
+/** How long the "rolling for initiative" screen stays up before the match board appears. */
+export const ROLL_ANIMATION_MS = 2200;
 
 export function actionTargetId(action: Action): string | undefined {
   if (action.type === 'playModule') return action.hostInstanceId;
@@ -55,12 +60,13 @@ interface StoreState {
   screen: Screen;
   state: GameState | null;
   playerFaction: Faction | null;
+  difficulty: Difficulty;
   pending: PendingSelection | null;
   botThinking: boolean;
   lastLogIndex: number;
   combatEvent: CombatEvent | null;
 
-  startMatch: (faction: Faction) => void;
+  startMatch: (faction: Faction, difficulty: Difficulty) => void;
   rematch: () => void;
   backToDeckSelect: () => void;
   selectSource: (sourceId: string, actions: Action[]) => void;
@@ -75,12 +81,13 @@ export const useGameStore = create<StoreState>((set, get) => ({
   screen: 'deckSelect',
   state: null,
   playerFaction: null,
+  difficulty: 'normal',
   pending: null,
   botThinking: false,
   lastLogIndex: 0,
   combatEvent: null,
 
-  startMatch: (faction) => {
+  startMatch: (faction, difficulty) => {
     const opponentFaction: Faction = faction === 'kessler' ? 'voss' : 'kessler';
     const firstPlayerId = Math.random() < 0.5 ? 'player' : 'opponent';
     const state = createMatch({
@@ -88,13 +95,29 @@ export const useGameStore = create<StoreState>((set, get) => ({
       opponentDeck: STARTER_DECKS[opponentFaction],
       firstPlayerId,
     });
-    set({ screen: 'match', state, playerFaction: faction, pending: null, lastLogIndex: state.log.length, botThinking: false });
-    get().runBotTurnIfNeeded();
+    // The roll's outcome is already decided above; the "rollingForFirst" screen just dramatizes
+    // it for a beat before the board takes over.
+    set({
+      screen: 'rollingForFirst',
+      state,
+      playerFaction: faction,
+      difficulty,
+      pending: null,
+      lastLogIndex: state.log.length,
+      botThinking: false,
+      combatEvent: null,
+    });
+    setTimeout(() => {
+      if (get().screen !== 'rollingForFirst') return;
+      set({ screen: 'match' });
+      get().runBotTurnIfNeeded();
+    }, ROLL_ANIMATION_MS);
   },
 
   rematch: () => {
     const faction = get().playerFaction;
-    if (faction) get().startMatch(faction);
+    const difficulty = get().difficulty;
+    if (faction) get().startMatch(faction, difficulty);
   },
 
   backToDeckSelect: () => set({ screen: 'deckSelect', state: null, playerFaction: null, pending: null }),
@@ -144,7 +167,7 @@ export const useGameStore = create<StoreState>((set, get) => ({
         set({ botThinking: false });
         return;
       }
-      const action = chooseNextAction(current, 'opponent');
+      const action = chooseNextAction(current, 'opponent', get().difficulty);
       const combatEvent = combatEventFor(current, action);
       const next = applyAction(current, action);
       set({ state: next, lastLogIndex: current.log.length, ...(combatEvent ? { combatEvent } : {}) });

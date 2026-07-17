@@ -16,9 +16,12 @@ This is an npm-workspaces monorepo:
   DOM/network dependency). Owns game state, turn structure, card data, combat resolution,
   and win conditions. This is the single source of truth for the rules and is unit tested.
 - [`packages/bot`](packages/bot) — rule-based bot AI that plays through the engine's public
-  action API (the same API a human player or, eventually, a network player would use).
-- [`apps/web`](apps/web) — the React + TypeScript + Vite client: deck select, the animated
-  board, hand, captain panels, and game-over screen.
+  action API (the same API a human player or, eventually, a network player would use). Ships
+  with three difficulty tiers (Easy, Normal, Hard); see [`packages/bot/src/index.ts`](packages/bot/src/index.ts)
+  for the heuristics behind each.
+- [`apps/web`](apps/web) — the React + TypeScript + Vite client: deck select (choose a House
+  and a bot difficulty), an animated "roll for initiative" screen that decides who goes
+  first, the animated board, hand, captain panels, and game-over screen.
 
 Because the client and bot both talk to the engine through the same `applyAction` /
 `getLegalActions` API, a future multiplayer server can wrap the exact same engine package

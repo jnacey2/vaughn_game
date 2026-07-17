@@ -14,6 +14,9 @@
 }
 
 .match-screen__turn-indicator {
+  display: flex;
+  align-items: center;
+  gap: 10px;
   font-size: 13px;
   font-weight: 700;
   letter-spacing: 0.04em;
@@ -21,6 +24,17 @@
   padding: 6px 14px;
   border-radius: 999px;
   border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.match-screen__difficulty-badge {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #14100c;
+  background: linear-gradient(90deg, #f0a561, #a78bfa);
+  padding: 3px 10px;
+  border-radius: 999px;
 }
 
 .match-screen__log {
