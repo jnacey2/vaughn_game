@@ -1,8 +1,8 @@
 import { describe, expect, it } from 'vitest';
 import { applyAction, createMatch, isGameOver, STARTER_DECKS, type GameState, type PlayerId } from '@void-dynasty/engine';
-import { chooseNextAction } from './index.js';
+import { chooseNextAction, DIFFICULTIES, type Difficulty } from './index.js';
 
-function simulateFullBotVsBotMatch(seed: number): GameState {
+function simulateFullBotVsBotMatch(seed: number, difficulty: Difficulty = 'normal'): GameState {
   let rngState = seed;
   const rng = () => {
     rngState = (rngState * 9301 + 49297) % 233280;
@@ -14,7 +14,7 @@ function simulateFullBotVsBotMatch(seed: number): GameState {
   while (!isGameOver(state) && safety < 5000) {
     safety += 1;
     const activeId: PlayerId = state.activePlayerId;
-    const action = chooseNextAction(state, activeId);
+    const action = chooseNextAction(state, activeId, difficulty);
     state = applyAction(state, action);
   }
   return state;
@@ -27,5 +27,19 @@ describe('bot vs bot simulation', () => {
       expect(isGameOver(finalState)).toBe(true);
       expect(['player', 'opponent']).toContain(finalState.winnerId);
     }
+  });
+
+  it('terminates on every difficulty tier, including easy which uses real randomness', () => {
+    for (const difficulty of DIFFICULTIES) {
+      for (let seed = 1; seed <= 5; seed += 1) {
+        const finalState = simulateFullBotVsBotMatch(seed, difficulty);
+        expect(isGameOver(finalState)).toBe(true);
+        expect(['player', 'opponent']).toContain(finalState.winnerId);
+      }
+    }
+  });
+
+  it('exposes exactly three difficulty tiers', () => {
+    expect(DIFFICULTIES).toEqual(['easy', 'normal', 'hard']);
   });
 });
