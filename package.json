@@ -1,0 +1,19 @@
+{
+  "name": "void-dynasty",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Void Dynasty - a space-opera trading card game (web, illustrated 2D cards, vs-bot or multiplayer).",
+  "workspaces": [
+    "packages/*",
+    "apps/*"
+  ],
+  "scripts": {
+    "dev": "npm run dev --workspace=apps/web",
+    "build": "npm run build --workspace=packages/engine --workspace=packages/bot --workspace=apps/web",
+    "test": "npm run test --workspace=packages/engine --workspace=packages/bot --if-present",
+    "lint": "npm run lint --workspace=apps/web --if-present"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
