@@ -1,0 +1,112 @@
+.match-screen {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  color: #f2eee6;
+  padding-bottom: 12px;
+}
+
+.match-screen__topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 10px 20px 0;
+}
+
+.match-screen__turn-indicator {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  background: rgba(0, 0, 0, 0.35);
+  padding: 6px 14px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.match-screen__log {
+  max-width: 340px;
+  font-size: 10px;
+  line-height: 1.5;
+  color: #c7c2b6;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 8px;
+  padding: 6px 10px;
+  text-align: right;
+}
+
+.match-screen__log-line {
+  opacity: 0.9;
+}
+
+.match-screen__enemy-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 24px 0;
+}
+
+.match-screen__rp {
+  font-size: 12px;
+  font-weight: 600;
+  color: #bfe9ff;
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(191, 233, 255, 0.3);
+  border-radius: 999px;
+  padding: 5px 12px;
+}
+
+.match-screen__divider {
+  height: 1px;
+  margin: 4px 24px;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.25), transparent);
+}
+
+.match-screen__player-footer {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 8px 24px;
+  flex-wrap: wrap;
+}
+
+.match-screen__ability-btn,
+.match-screen__end-turn {
+  border: none;
+  border-radius: 999px;
+  padding: 10px 18px;
+  font-weight: 700;
+  font-size: 12px;
+  cursor: pointer;
+  transition: transform 140ms ease, filter 140ms ease, opacity 140ms ease;
+}
+
+.match-screen__ability-btn {
+  background: #ffd166;
+  color: #241c05;
+}
+
+.match-screen__ability-btn--selected {
+  box-shadow: 0 0 0 3px #6ee7ff;
+}
+
+.match-screen__end-turn {
+  background: #f0a561;
+  color: #241c05;
+  margin-left: auto;
+}
+
+.match-screen__ability-btn:disabled,
+.match-screen__end-turn:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+
+.match-screen__ability-btn:not(:disabled):hover,
+.match-screen__end-turn:not(:disabled):hover {
+  transform: translateY(-2px);
+  filter: brightness(1.1);
+}
+
+.match-screen__hand {
+  margin-top: auto;
+}

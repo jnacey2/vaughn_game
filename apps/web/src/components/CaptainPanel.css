@@ -1,0 +1,112 @@
+.captain-panel {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border-radius: 16px;
+  padding: 4px;
+  transition: background 160ms ease;
+}
+
+.captain-panel--clickable {
+  cursor: pointer;
+}
+
+.captain-panel--clickable:hover {
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.captain-panel--enemy {
+  flex-direction: row;
+}
+
+.captain-panel--player {
+  flex-direction: row;
+}
+
+.captain-panel__portrait {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  border: 3px solid #666;
+  overflow: hidden;
+  padding: 0;
+  background: #111;
+  flex-shrink: 0;
+  transition: box-shadow 160ms ease, transform 160ms ease;
+}
+
+.captain-panel--clickable .captain-panel__portrait {
+  cursor: pointer;
+}
+
+.captain-panel--clickable:hover .captain-panel__portrait {
+  transform: scale(1.06);
+}
+
+.captain-panel--highlighted .captain-panel__portrait {
+  animation: captain-pulse 1.1s ease-in-out infinite;
+}
+
+@keyframes captain-pulse {
+  0%, 100% { box-shadow: 0 0 0 4px #ffd166; }
+  50% { box-shadow: 0 0 0 7px #ffd166; }
+}
+
+.captain-panel--hit .captain-panel__portrait {
+  animation: captain-hit 420ms ease;
+}
+
+@keyframes captain-hit {
+  0% { filter: brightness(1); transform: scale(1); }
+  30% { filter: brightness(2.4) saturate(0) sepia(1) hue-rotate(-40deg); transform: scale(0.92) rotate(-2deg); }
+  100% { filter: brightness(1); transform: scale(1); }
+}
+
+.captain-panel__portrait img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.captain-panel__placeholder {
+  width: 100%;
+  height: 100%;
+}
+
+.captain-panel__info {
+  min-width: 120px;
+}
+
+.captain-panel__name {
+  font-weight: 700;
+  font-size: 13px;
+  margin-bottom: 3px;
+}
+
+.captain-panel__hullbar {
+  position: relative;
+  width: 130px;
+  height: 16px;
+  background: #1c1a22;
+  border: 1px solid #3a3745;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.captain-panel__hullbar-fill {
+  position: absolute;
+  inset: 0;
+  transition: width 400ms ease;
+}
+
+.captain-panel__hullbar-label {
+  position: relative;
+  z-index: 1;
+  display: block;
+  text-align: center;
+  font-size: 10px;
+  font-weight: 700;
+  line-height: 16px;
+  color: #fff;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8);
+}

@@ -1,0 +1,31 @@
+services:
+  - type: web
+    name: void-dynasty
+    runtime: static
+    plan: free
+    buildCommand: npm install && npm run build --workspace=apps/web
+    staticPublishPath: apps/web/dist
+    autoDeploy: true
+    previews:
+      generation: automatic
+    routes:
+      # Client-side routed SPA — always fall back to index.html.
+      - type: rewrite
+        source: /*
+        destination: /index.html
+    headers:
+      - path: /assets/*
+        name: Cache-Control
+        value: public, max-age=31536000, immutable
+      - path: /art/*
+        name: Cache-Control
+        value: public, max-age=31536000, immutable
+      - path: /index.html
+        name: Cache-Control
+        value: no-cache, no-store, must-revalidate
+      - path: /*
+        name: X-Frame-Options
+        value: DENY
+      - path: /*
+        name: X-Content-Type-Options
+        value: nosniff
