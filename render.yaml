@@ -2,10 +2,9 @@ services:
   - type: web
     name: void-dynasty
     runtime: static
-    plan: free
     buildCommand: npm install && npm run build --workspace=apps/web
     staticPublishPath: apps/web/dist
-    autoDeploy: true
+    autoDeployTrigger: commit
     previews:
       generation: automatic
     routes:
