@@ -1,5 +1,6 @@
 import { useMemo } from 'react';
 import { getCardDef, getLegalActions, opponentOf, type CardInDeck, type UnitInstance } from '@void-dynasty/engine';
+import { DIFFICULTY_LABELS } from '@void-dynasty/bot';
 import { actionTargetId, useGameStore } from '../game/store';
 import { HOUSE_THEME } from '../game/houseTheme';
 import { useFlash } from '../game/useFlash';
@@ -10,6 +11,7 @@ import './MatchScreen.css';
 
 export function MatchScreen() {
   const state = useGameStore((s) => s.state);
+  const difficulty = useGameStore((s) => s.difficulty);
   const pending = useGameStore((s) => s.pending);
   const combatEvent = useGameStore((s) => s.combatEvent);
   const botThinking = useGameStore((s) => s.botThinking);
@@ -102,6 +104,7 @@ export function MatchScreen() {
       <div className="match-screen__topbar">
         <div className="match-screen__turn-indicator">
           Turn {state.turn} — {isMyTurn ? 'Your move' : botThinking ? "Opponent's fleet is maneuvering…" : "Opponent's move"}
+          <span className="match-screen__difficulty-badge">{DIFFICULTY_LABELS[difficulty]}</span>
         </div>
         <div className="match-screen__log" onClick={(e) => e.stopPropagation()}>
           {state.log.slice(-4).map((line, i) => (

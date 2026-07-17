@@ -30,6 +30,63 @@
   color: #cfc9bd;
 }
 
+.deck-select__difficulty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 40px;
+  padding: 18px 28px;
+  border-radius: 14px;
+  background: rgba(20, 17, 12, 0.55);
+  border: 1px solid rgba(207, 201, 189, 0.18);
+}
+
+.deck-select__difficulty-label {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: #cfc9bd;
+}
+
+.deck-select__difficulty-options {
+  display: flex;
+  gap: 8px;
+}
+
+.deck-select__difficulty-btn {
+  border: 1px solid rgba(207, 201, 189, 0.35);
+  background: transparent;
+  color: #cfc9bd;
+  padding: 8px 20px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  transition: transform 160ms ease, background 160ms ease, color 160ms ease, border-color 160ms ease;
+}
+
+.deck-select__difficulty-btn:hover {
+  border-color: #f0a561;
+  color: #f2eee6;
+}
+
+.deck-select__difficulty-btn--selected {
+  background: linear-gradient(90deg, #f0a561, #a78bfa);
+  border-color: transparent;
+  color: #14100c;
+  transform: translateY(-1px);
+}
+
+.deck-select__difficulty-description {
+  font-size: 12px;
+  font-style: italic;
+  color: #a29c8f;
+  min-height: 16px;
+  text-align: center;
+}
+
 .deck-select__houses {
   display: flex;
   gap: 32px;

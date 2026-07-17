@@ -1,0 +1,131 @@
+.roll-screen {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  background: radial-gradient(ellipse at 50% 40%, #241f38 0%, #05040a 65%);
+  color: #f2eee6;
+  overflow: hidden;
+}
+
+.roll-screen__die {
+  font-size: 64px;
+  line-height: 1;
+  animation: roll-screen-spin 1.4s cubic-bezier(0.2, 0.7, 0.3, 1) forwards;
+}
+
+@keyframes roll-screen-spin {
+  0% {
+    transform: rotate(0deg) scale(1);
+  }
+  70% {
+    transform: rotate(900deg) scale(1.15);
+  }
+  100% {
+    transform: rotate(1080deg) scale(1);
+  }
+}
+
+.roll-screen__label {
+  font-size: 15px;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: #cfc9bd;
+  height: 20px;
+}
+
+.roll-screen__label--rolling {
+  opacity: 1;
+  animation: roll-screen-fade-out 0.5s ease-out 1.4s forwards;
+}
+
+.roll-screen__label--result {
+  opacity: 0;
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  color: #f0a561;
+  animation: roll-screen-fade-in 0.5s ease-out 1.6s forwards;
+}
+
+@keyframes roll-screen-fade-out {
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes roll-screen-fade-in {
+  to {
+    opacity: 1;
+  }
+}
+
+.roll-screen__contenders {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+}
+
+.roll-screen__contender {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 12px;
+  border-radius: 16px;
+  opacity: 0.75;
+  transition: none;
+}
+
+.roll-screen__contender--winner {
+  opacity: 1;
+  animation: roll-screen-winner-glow 0.6s ease-out 1.6s forwards;
+}
+
+@keyframes roll-screen-winner-glow {
+  0% {
+    box-shadow: 0 0 0 rgba(0, 0, 0, 0);
+  }
+  100% {
+    box-shadow: 0 0 28px var(--house-glow, #f0a561);
+    background: rgba(255, 255, 255, 0.04);
+  }
+}
+
+.roll-screen__portrait {
+  width: 96px;
+  height: 96px;
+  border-radius: 50%;
+  border: 2px solid;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.roll-screen__portrait img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.roll-screen__contender-name {
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.roll-screen__contender-house {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #a29c8f;
+}
+
+.roll-screen__vs {
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: #6b6459;
+}
